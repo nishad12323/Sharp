@@ -1,0 +1,226 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  font-family: "Roboto", sans-serif;
+  transition: all 0.35s cubic-bezier(0.42, 2, 0.21, 1.1);
+}
+
+::selection {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 80%);
+  color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+}
+
+body.sharp {
+  margin: 0;
+  padding: 50px;
+  background-color: hsl(
+    var(--theme-secondary-hue),
+    var(--theme-secondary-saturation),
+    99%
+  );
+}
+
+.sharp button {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 50%);
+  color: hsl(var(--theme-hue), var(--theme-saturation), 20%);
+  border: none;
+  padding: 15px;
+  border-radius: 100px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+  overflow: hidden;
+  margin: 5px 0;
+}
+
+.sharp button[filled] {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 35%);
+  color: hsl(var(--theme-hue), var(--theme-saturation), 100%);
+}
+
+.sharp button:hover {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 65%);
+}
+
+.sharp button[filled]:hover {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 30%);
+}
+
+.sharp button[outlined] {
+  background-color: transparent;
+  border: 1px solid black;
+  color: hsl(var(--theme-hue), var(--theme-saturation), 35%);
+}
+
+.sharp button[outlined]:hover {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 90%);
+}
+
+.sharp button[main] {
+  border-radius: 30px;
+  font-size: 2.5rem;
+  padding: 30px;
+}
+
+.sharp button[tonal] {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 90%);
+  color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+}
+
+.sharp button[tonal]:hover {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 80%);
+  color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+}
+
+.sharp button[elevated] {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.sharp button[main]:active {
+  border-radius: 10px;
+}
+
+.sharp section {
+  border-radius: 30px;
+  padding: 30px;
+  background-color: hsl(
+    var(--theme-secondary-hue),
+    var(--theme-secondary-saturation),
+    90%
+  );
+  margin: 30px 0px;
+}
+
+.sharp h1 {
+  font-size: 4rem;
+  margin: 0;
+  margin-top: 10px;
+}
+
+.sharp h2 {
+  font-size: 3rem;
+  margin: 20px 0;
+  margin-bottom: 30px;
+  width: 100%;
+  border-bottom: 8px solid
+    hsla(var(--theme-hue), var(--theme-saturation), 20%, 0.5);
+  padding-bottom: 10px;
+}
+
+.sharp h3 {
+  font-size: 2rem;
+  margin: 20px 0;
+}
+
+.sharp code {
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  font-family: "Consolas", Courier, monospace;
+  border-radius: 5px;
+}
+
+.sharp code-block {
+  display: block;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  font-family: "Consolas", Courier, monospace;
+}
+
+.sharp li {
+  margin: 10px 0;
+  list-style-type: disc;
+}
+
+.sharp hr {
+  border: none;
+  border-top: 8px solid
+    hsla(var(--theme-secondary-hue), var(--theme-secondary-saturation), 20%);
+  margin: 60px 0;
+}
+
+.sharp button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.sharp button-group button {
+  border-radius: 10px;
+}
+
+.sharp button-group[selectable] button {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 90%);
+  color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+}
+
+.sharp button-group[selectable] button:hover:not([selected]) {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 80%);
+  color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+}
+
+.sharp button[selected]:not(.sharp button-group button) {
+  border-radius: 100px;
+}
+
+.sharp button-group[connected] {
+  gap: 2px;
+}
+
+.sharp button-group[connected] button[selected] {
+  border-radius: 100px;
+}
+
+.sharp button-group[rounded] button:first-child {
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.sharp button-group[rounded] button:last-child {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.sharp button-group button:active:not(:last-child):not(:first-child) {
+  padding: 15px 35px;
+}
+
+.sharp button-group button:active:first-child {
+  padding: 15px;
+  padding-right: 35px;
+}
+
+.sharp button-group button:active:last-child {
+  padding: 15px;
+  padding-left: 35px;
+}
+
+.sharp button-group button:active + button,
+.sharp button-group button:has(+ button:active) {
+  padding: 15px 5px;
+}
+
+.sharp button[selected],
+.sharp button-group[selectable] button[selected] {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 35%);
+  color: hsl(var(--theme-hue), var(--theme-saturation), 100%);
+}
+
+.sharp [secondary],
+.sharp [secondary] * {
+  --theme-hue: var(--theme-secondary-hue);
+  --theme-saturation: var(--theme-secondary-saturation);
+}
+
+@media (max-width: 600px) {
+  .sharp h1 {
+    font-size: 2.5rem;
+  }
+
+  .sharp section {
+    padding: 20px;
+  }
+}
