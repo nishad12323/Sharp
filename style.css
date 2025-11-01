@@ -1,23 +1,209 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
-* {
+@view-transition {
+  navigation: auto;
+}
+
+@keyframes move-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+    background-color: transparent;
+  }
+
+  to {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+}
+
+@keyframes move-in {
+  from {
+    transform: translateX(30px);
+    opacity: 0;
+    background-color: transparent;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Apply the custom animation to the old and new page states */
+
+::view-transition-old(forward) {
+  animation: 0.2s ease-in-out both move-out;
+}
+
+::view-transition-new(forward) {
+  animation: move-in 0.2s ease-in-out 0.5s 1 both;
+}
+
+main {
+  view-transition-name: forward;
+}
+
+:root:not(:has(main)) {
+  view-transition-name: forward;
+}
+
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: 100 700;
+  src: url(https://fonts.gstatic.com/s/materialsymbolsoutlined/v266/kJEhBvYX7BgnkSrUwT8OhrdQw4oELdPIeeII9v6oFsI.woff2) format("woff2");
+}
+
+@property --theme-hue {
+  syntax: "<integer>";
+  inherits: true;
+  initial-value: 187;
+}
+
+@property --theme-saturation {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 100%;
+}
+
+@property --theme-secondary-hue {
+  syntax: "<integer>";
+  inherits: true;
+  initial-value: 160;
+}
+
+@property --theme-secondary-saturation {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 100%;
+}
+
+@property --progress {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 50%;
+}
+
+.sharp icon[filled],
+.sharp icon:not([filled]):not([outlined]) {
+  font-family: "Material Symbols Outlined";
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.sharp icon[outlined],
+.sharp button[toggle]:not([selected])>icon:not([filled]):not([outlined]),
+.sharp button-group[toggle] button:not([selected])>icon:not([filled]):not([outlined]),
+.sharp nav-item:not([selected])>icon:not([filled]):not([outlined]) {
+  font-family: "Material Symbols Outlined";
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.sharp button[selected] icon:not([selected]):not(:only-child),
+.sharp nav-item[selected] icon:not([selected]):not(:only-child) {
+  display: none;
+}
+
+.sharp button[selected] icon[selected]:not(:only-child),
+.sharp nav-item[selected] icon[selected]:not(:only-child) {
+  display: block;
+}
+
+.sharp button:not([selected]) icon[selected]:not(:only-child),
+.sharp nav-item:not([selected]) icon[selected]:not(:only-child) {
+  display: none;
+}
+
+.sharp button:not([selected]) icon:not([selected]):not(:only-child),
+.sharp nav-item:not([selected]) icon:not([selected]):not(:only-child) {
+  display: block;
+}
+
+.sharp * {
   font-family: "Roboto", sans-serif;
   transition: all 0.35s cubic-bezier(0.42, 2, 0.21, 1.1);
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 ::selection {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 80%);
-  color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 50%);
+  color: hsl(var(--theme-hue), var(--theme-saturation), 0%);
 }
 
 body.sharp {
   margin: 0;
   padding: 50px;
-  background-color: hsl(
-    var(--theme-secondary-hue),
-    var(--theme-secondary-saturation),
-    99%
-  );
+  background-color: hsl(var(--theme-secondary-hue),
+      var(--theme-secondary-saturation),
+      99%);
+
+  padding-top: 0;
+  scrollbar-width: none;
+}
+
+body.sharp:not(:has(footer)) {
+  padding-bottom: 150px;
+}
+
+body.sharp:has(> main):has(> nav-rail) {
+  display: flex;
+  padding: 0;
+}
+
+.sharp main {
+  width: 100%;
+  padding: 50px;
+  background-color: hsl(var(--theme-secondary-hue),
+      var(--theme-secondary-saturation),
+      99%);
+  flex-grow: 1;
+  overflow-y: auto;
+  height: 100vh;
+}
+
+.sharp main:has(footer) {
+  padding-bottom: 0;
+}
+
+body.sharp:has(> main[pane]) {
+  background-color: hsl(var(--theme-secondary-hue),
+      var(--theme-secondary-saturation),
+      95%);
+}
+
+.sharp main[pane],
+.sharp pane {
+  margin: 25px;
+  overflow: auto;
+  height: calc(100vh - 50px);
+  border-radius: 50px;
+  background-color: hsl(var(--theme-secondary-hue),
+      var(--theme-secondary-saturation),
+      99%);
+  padding: 50px;
+  margin-left: 0;
+}
+
+.sharp nav-rail+main[pane],
+.sharp nav-rail+pane {
+  margin-left: 10px;
+}
+
+.sharp main[pane]~pane,
+.sharp pane:has(main[pane]) {
+  background-color: hsl(var(--theme-secondary-hue),
+      var(--theme-secondary-saturation),
+      99%);
+}
+
+.sharp pane {
+  width: 500px;
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 95%);
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .sharp button {
@@ -33,6 +219,10 @@ body.sharp {
   max-width: 100%;
   overflow: hidden;
   margin: 5px 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .sharp button[filled] {
@@ -58,12 +248,6 @@ body.sharp {
   background-color: hsl(var(--theme-hue), var(--theme-saturation), 90%);
 }
 
-.sharp button[main] {
-  border-radius: 30px;
-  font-size: 2.5rem;
-  padding: 30px;
-}
-
 .sharp button[tonal] {
   background-color: hsl(var(--theme-hue), var(--theme-saturation), 90%);
   color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
@@ -74,6 +258,12 @@ body.sharp {
   color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
 }
 
+.sharp button[main] {
+  border-radius: 30px;
+  font-size: 2.5rem;
+  padding: 35px;
+}
+
 .sharp button[elevated] {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
@@ -82,36 +272,151 @@ body.sharp {
   border-radius: 10px;
 }
 
+.sharp button[elevated]:active {
+  box-shadow: none;
+  translate: 0 6px;
+}
+
 .sharp section {
   border-radius: 30px;
   padding: 30px;
-  background-color: hsl(
-    var(--theme-secondary-hue),
-    var(--theme-secondary-saturation),
-    90%
-  );
+  background-color: hsl(var(--theme-secondary-hue),
+      var(--theme-secondary-saturation),
+      90%);
   margin: 30px 0px;
+}
+
+.sharp section[indent],
+.sharp section[light],
+.sharp section[note],
+.sharp section[blockquote],
+section main {
+  border-left: rgba(0, 0, 0, 0.2) 8px solid;
+  background-color: initial;
+  border-radius: initial;
+  padding: 0 30px;
+
+  &[blockquote] {
+    color: rgb(91, 91, 91);
+  }
+
+  &[light] {
+    border-radius: 30px;
+    padding: 30px;
+    background-color: hsl(var(--theme-secondary-hue),
+        var(--theme-secondary-saturation),
+        97%);
+    margin: 30px 0px;
+    border: none;
+  }
+
+  &[note] {
+    border-left-color: rgb(162, 162, 255);
+    background-color: rgb(233, 233, 255);
+    padding: 20px 30px;
+    border-radius: 0 15px 15px 0;
+
+    &::before {
+      content: "Note";
+      font-size: 1.3rem;
+      width: 100%;
+      font-weight: bold;
+    }
+  }
+}
+
+.sharp footer[filled] {
+  border-radius: 30px 30px 0 0;
+  padding: 30px;
+  padding-bottom: 150px;
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 90%);
+  margin: 30px 0px;
+  margin-bottom: 0;
+}
+
+.sharp footer {
+  padding-bottom: 150px;
+}
+
+.sharp .sharp-header {
+  background-image: url(/Assets/Backdrop.png);
+}
+
+.sharp a,
+.sharp a:visited {
+  color: hsl(var(--theme-hue), var(--theme-saturation), 30%);
+  text-decoration: underline;
+  transition: none;
+}
+
+.sharp a:hover {
+  text-decoration: none;
+}
+
+.sharp a:active {
+  color: #fff;
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 30%);
+}
+
+.sharp h0 {
+  font-size: 5rem;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 .sharp h1 {
   font-size: 4rem;
   margin: 0;
   margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .sharp h2 {
   font-size: 3rem;
-  margin: 20px 0;
-  margin-bottom: 30px;
+  margin-top: 50px;
+  margin: 30px 0;
   width: 100%;
-  border-bottom: 8px solid
-    hsla(var(--theme-hue), var(--theme-saturation), 20%, 0.5);
+  border-bottom: 8px solid hsla(var(--theme-hue), var(--theme-saturation), 20%, 0.5);
   padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .sharp h3 {
   font-size: 2rem;
   margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sharp h4 {
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sharp h5 {
+  color: #888;
+  font-size: 0.9rem;
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sharp [summary] {
+  font-size: 1.2rem;
+}
+
+.sharp [details] {
+  font-size: 0.9rem;
 }
 
 .sharp code {
@@ -124,46 +429,54 @@ body.sharp {
 .sharp code-block {
   display: block;
   background-color: #f0f0f0;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 30px;
+  border-radius: 15px;
   overflow-x: auto;
-  white-space: pre-wrap;
   font-family: "Consolas", Courier, monospace;
+  border: 1px solid black;
+}
+
+.sharp code-block::before {
+  content: attr(language) "";
+  width: 100%;
+  background-color: #fff;
+  display: inline;
+  content: "";
 }
 
 .sharp li {
   margin: 10px 0;
-  list-style-type: disc;
 }
 
 .sharp hr {
   border: none;
-  border-top: 8px solid
-    hsla(var(--theme-secondary-hue), var(--theme-secondary-saturation), 20%);
+  border-top: 8px solid hsla(var(--theme-secondary-hue), var(--theme-secondary-saturation), 20%);
   margin: 60px 0;
 }
 
 .sharp button-group {
   display: flex;
   gap: 10px;
+  width: 100%;
+  align-items: center;
 }
 
-.sharp button-group button {
+.sharp button-group:not([seperate]) button {
   border-radius: 10px;
 }
 
-.sharp button-group[selectable] button {
+.sharp button-group[toggle] button {
   background-color: hsl(var(--theme-hue), var(--theme-saturation), 90%);
   color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
 }
 
-.sharp button-group[selectable] button:hover:not([selected]) {
+.sharp button-group[toggle] button:hover:not([selected]) {
   background-color: hsl(var(--theme-hue), var(--theme-saturation), 80%);
   color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
 }
 
 .sharp button[selected]:not(.sharp button-group button) {
-  border-radius: 100px;
+  border-radius: 50px;
 }
 
 .sharp button-group[connected] {
@@ -185,34 +498,601 @@ body.sharp {
 }
 
 .sharp button-group button:active:not(:last-child):not(:first-child) {
-  padding: 15px 35px;
+  padding-right: 35px;
+  padding-left: 35px;
+}
+
+.sharp button-group button[main]:active:not(:last-child):not(:first-child) {
+  padding-left: 55px;
+  padding-right: 55px;
 }
 
 .sharp button-group button:active:first-child {
-  padding: 15px;
   padding-right: 35px;
 }
 
 .sharp button-group button:active:last-child {
-  padding: 15px;
   padding-left: 35px;
 }
 
-.sharp button-group button:active + button,
-.sharp button-group button:has(+ button:active) {
-  padding: 15px 5px;
+.sharp button-group button:active:first-child:has(+ button[main]) {
+  padding-right: 65px;
 }
 
-.sharp button[selected],
-.sharp button-group[selectable] button[selected] {
+.sharp button-group button[main]+button:active:last-child {
+  padding-left: 65px;
+}
+
+.sharp button-group button[main]:active:first-child {
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+.sharp button-group button[main]:active:last-child {
+  padding-right: 40px;
+  padding-left: 40px;
+}
+
+.sharp button-group button[main] {
+  flex-grow: 1;
+}
+
+.sharp button-group button[main]:active {
+  border-radius: 30px;
+}
+
+.sharp button-group button:active+button,
+.sharp button-group button:has(+ button:active) {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.sharp button-group button:active+button[main],
+.sharp button-group button[main]:has(+ button:active) {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.sharp button-group button:active:not(:last-child):not(:first-child):has(+ button[main]) {
+  padding-right: 85px;
+}
+
+.sharp button-group button[main]+button:active:not(:last-child):not(:first-child) {
+  padding-left: 85px;
+}
+
+.sharp button[toggle][tonal-normal],
+.sharp button[toggle][tonal-filled],
+.sharp button-group[toggle][tonal-normal] button,
+.sharp button-group[toggle][tonal-filled] button {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 90%);
+  color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+}
+
+.sharp button[toggle][tonal-normal]:hover,
+.sharp button[toggle][tonal-filled]:hover,
+.sharp button-group[toggle][tonal-normal] button:hover,
+.sharp button-group[toggle][tonal-filled] button:hover {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 80%);
+  color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+}
+
+.sharp button[toggle][selected]:not([tonal-filled]):not([normal-filled]):not([tonal-normal]),
+.sharp button[toggle][selected][tonal-normal],
+.sharp button-group[toggle]:not([tonal-filled]):not([normal-filled]):not([tonal-normal]) button[selected],
+.sharp button-group[toggle][tonal-normal] button[selected] {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 65%);
+  color: hsl(var(--theme-hue), var(--theme-saturation), 20%);
+}
+
+.sharp button[toggle][selected]:hover:not([tonal-filled]):not([normal-filled]):not([tonal-normal]),
+.sharp button[toggle][selected][tonal-normal]:hover,
+.sharp button-group[toggle]:not([tonal-filled]):not([normal-filled]):not([tonal-normal]) button[selected]:hover,
+.sharp button-group[toggle][tonal-normal] button[selected]:hover {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 65%);
+  color: hsl(var(--theme-hue), var(--theme-saturation), 20%);
+}
+
+.sharp button[toggle][selected][tonal-filled],
+.sharp button[toggle][selected][normal-filled],
+.sharp button-group[toggle][tonal-filled] button[selected],
+.sharp button-group[toggle][normal-filled] button[selected],
+.sharp button-group[connected] button[selected] {
   background-color: hsl(var(--theme-hue), var(--theme-saturation), 35%);
   color: hsl(var(--theme-hue), var(--theme-saturation), 100%);
+}
+
+.sharp button[toggle][selected][tonal-filled]:hover,
+.sharp button[toggle][selected][normal-filled]:hover,
+.sharp button-group[toggle] button[selected][tonal-filled]:hover,
+.sharp button-group[toggle] button[selected][normal-filled]:hover {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 30%);
+  color: hsl(var(--theme-hue), var(--theme-saturation), 100%);
+}
+
+.sharp button[toggle]:not([tonal-filled]):not([normal-filled]):not([tonal-normal]),
+.sharp button-group[toggle]:not([tonal-filled]):not([normal-filled]):not([tonal-normal]) button {
+  background-color: #f0f0f0;
+  color: #1f1f1f;
+}
+
+.sharp button-group[vertical] {
+  flex-direction: column;
+}
+
+.sharp button-group[connected][check] button[selected]::before {
+  content: "\e5ca";
+  font-family: "Material Symbols Outlined";
+}
+
+.full-width {
+  width: 100%;
+}
+
+.full-height {
+  height: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+[rounded] {
+  border-radius: 10px;
+}
+
+[fit-cover] {
+  object-fit: cover;
+}
+
+.sharp toast {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+  padding: 10px 20px;
+  visibility: hidden;
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  align-items: center;
+  color: #f0f0f0;
+  bottom: 10px;
+  width: calc(50% - 100px);
+  border-radius: 10px;
+  flex-wrap: wrap;
+  justify-items: space-between;
+  translate: 0 10px;
+  opacity: 0;
+  margin-inline: auto;
+  left: 0;
+  right: 0;
+  min-width: 300px;
+  z-index: 10;
+}
+
+.sharp toast button {
+  text-align: right;
+  display: inline;
+}
+
+.sharp progressbar {
+  display: flex;
+  height: 8px;
+  width: 50%;
+  --progress: 40%;
+  gap: 5px;
+}
+
+.sharp progressbar::before {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 50%);
+  height: 100%;
+  width: var(--progress);
+  content: "";
+  border-radius: 100px;
+}
+
+.sharp progressbar::after {
+  background-color: #f0f0f0;
+  height: 100%;
+  width: calc(100% - var(--progress));
+  content: "";
+  border-radius: 100px;
+  border-right: 8px solid hsl(var(--theme-hue), var(--theme-saturation), 50%);
+}
+
+.sharp progressbar:has(slider) {
+  height: 70px;
+}
+
+.sharp progressbar:has(slider)::before {
+  border-radius: 10px;
+}
+
+.sharp progressbar:has(slider)::after {
+  border-right: none;
+  border-radius: 10px;
+}
+
+.sharp progressbar[rounded]:has(slider) {
+  &::before {
+    border-top-left-radius: 35px;
+    border-bottom-left-radius: 35px;
+  }
+
+  &::after {
+    border-top-right-radius: 35px;
+    border-bottom-right-radius: 35px;
+  }
+}
+
+.sharp progressbar slider {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 50%);
+  height: 100%;
+  width: 5px;
+  border-radius: 10px;
+  cursor: ew-resize;
+  transition: 0.1s ease-in-out;
+}
+
+.sharp progressbar slider:active {
+  width: 2.5px;
+  margin: calc(2.5px / 2);
+}
+
+.sharp progressbar[filled]::before,
+.sharp progressbar[filled] slider {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 40%);
+}
+
+.sharp tooltip {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 2px #0006;
+  opacity: 0;
+  translate: 0 -10px;
+}
+
+.sharp :hover+tooltip,
+.sharp tooltip:hover {
+  display: block;
+  opacity: 1;
+}
+
+nav-rail {
+  width: 100px;
+  min-width: 100px;
+  max-width: 100%;
+  height: 100vh;
+  background-color: hsl(var(--theme-secondary-hue),
+      var(--theme-secondary-saturation),
+      95%);
+  color: #4d4256;
+  position: relative;
+  top: 0;
+  padding: 10px;
+  z-index: 100;
+}
+
+nav-item {
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  cursor: pointer;
+  gap: 0px;
+  margin-bottom: 15px;
+}
+
+nav-item icon {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  border-radius: 100px;
+}
+
+nav-item:hover {
+  color: #000;
+}
+
+nav-item:hover icon {
+  background-color: rgba(0, 0, 0, 0.1);
+  scale: 1.05;
+}
+
+nav-item[selected] {
+  color: hsl(var(--theme-hue), var(--theme-saturation), 20%);
+  font-weight: bold;
+  gap: 5px;
+}
+
+nav-item[selected] icon {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 80%);
+}
+
+nav-rail FAB {
+  background-color: hsl(var(--theme-secondary-hue),
+      var(--theme-secondary-saturation),
+      50%);
+  color: hsl(var(--theme-hue), var(--theme-saturation), 20%);
+  width: 80%;
+  display: block;
+  aspect-ratio: 1/1;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+nav-rail FAB icon {
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  border-radius: 100px;
+}
+
+nav-rail:has(~ main[pane]) {
+  padding-right: 0;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+nav-drawer {
+  position: fixed;
+  top: 0;
+  min-width: 250px;
+  background-color: hsl(var(--theme-secondary-hue),
+      var(--theme-secondary-saturation),
+      95%);
+  flex-direction: column;
+  left: 100px;
+  display: none;
+  padding: 10px;
+  padding-left: 0;
+  padding-right: 25px;
+  border-radius: 0 50px 50px 0;
+  z-index: 1;
+  box-shadow: 10px 0 10px -10px #000a;
+  height: 100%;
+}
+
+nav-drawer nav-item {
+  justify-content: initial;
+  align-items: initial;
+  margin: 0px;
+  padding: 15px;
+  border-radius: 100px;
+}
+
+nav-drawer nav-item:hover {
+  background-color: #0001;
+}
+
+:has(~ main[pane]) nav-drawer,
+nav-drawer~main[pane] {
+  left: 110px;
+  margin: 25px 0;
+  height: calc(100% - 50px);
+}
+
+.sharp nav-drawer hr {
+  border-top: 1px solid hsl(var(--theme-hue), var(--theme-saturation), 10%);
+  margin: 15px;
+}
+
+.sharp nav-drawer h4 {
+  margin: 5px 15px;
+  color: #4d4256;
+}
+
+/* nav-item:hover+nav-drawer,
+nav-drawer:hover {
+  animation: enter 0.1s;
+  display: flex;
+}
+
+nav-item:has(~:not(nav-item):not(nav-drawer):hover) {
+  animation: exit 0.1s;
+  display: none;
+} */
+
+.sharp segmented-button {
+  display: flex;
+}
+
+.sharp segmented-button sb-option {
+  border: 1px solid #4d4256;
+  border-left: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px calc((24px / 2) + 15px);
+  cursor: pointer;
+  transition: 0.1s all, 0s padding;
+  font-size: 1.2rem;
+  gap: 5px;
+}
+
+.sharp segmented-button[expand] sb-option,
+.sharp button-group[expand] button,
+.sharp button[expand] {
+  flex-grow: 1;
+}
+
+.sharp segmented-button sb-option:hover {
+  background-color: #f0f0f0;
+}
+
+.sharp segmented-button sb-option:first-child {
+  border-radius: 50px 0 0 50px;
+  border-left: 1px solid #4d4256;
+}
+
+.sharp segmented-button sb-option:last-child {
+  border-radius: 0 50px 50px 0;
+  border-left: 1px solid #4d4256;
+}
+
+.sharp segmented-button sb-option[selected] {
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 90%);
+  padding: 15px;
+}
+
+.sharp segmented-button sb-option[selected]::before {
+  content: "\e5ca";
+  font-family: "Material Symbols Outlined";
+  font-size: 24px;
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.sharp button[toggle][shape-morph]:not([selected]),
+.sharp button-group[toggle][shape-morph] button:not([selected]) {
+  border-radius: 15px;
+}
+
+.sharp button[toggle][shape-morph][selected],
+.sharp button-group[toggle][shape-morph] button[selected] {
+  border-radius: 100px;
 }
 
 .sharp [secondary],
 .sharp [secondary] * {
   --theme-hue: var(--theme-secondary-hue);
   --theme-saturation: var(--theme-secondary-saturation);
+}
+
+.sharp [xxs] {
+  font-size: xx-small;
+}
+
+.sharp [xs] {
+  font-size: x-small;
+}
+
+.sharp [s] {
+  font-size: small;
+}
+
+.sharp [m] {
+  font-size: medium;
+}
+
+.sharp [l] {
+  font-size: large;
+}
+
+.sharp [xl] {
+  font-size: x-large;
+}
+
+.sharp [xxl] {
+  font-size: xx-large;
+}
+
+.sharp [text-center] {
+  text-align: center;
+}
+
+.sharp [flex-center] {
+  justify-self: center;
+}
+
+.sharp [center] {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sharp switch {
+  transition: 0.35s all cubic-bezier(0.42, 2, 0.21, 1.1), 0.2s background ease-in-out, 0.2s border ease-in-out;
+}
+
+.sharp switch:not([selected]) {
+  box-sizing: content-box;
+  display: block;
+  width: fit-content;
+  border-radius: 100px;
+  cursor: pointer;
+  background-color: #dddddd;
+  border: 3px solid #777;
+}
+
+.sharp switch[selected] {
+  box-sizing: content-box;
+  border: 3px solid hsl(var(--theme-hue), var(--theme-saturation), 35%);
+  display: block;
+  width: fit-content;
+  border-radius: 100px;
+  cursor: pointer;
+  background-color: hsl(var(--theme-hue), var(--theme-saturation), 35%);
+}
+
+.sharp switch::before {
+  content: "";
+  font-family: "Material Symbols Outlined";
+  display: block;
+  width: 25px;
+  height: 25px;
+  background-color: #777;
+  border-radius: 100px;
+  margin: 5px;
+  margin-right: 25px;
+  transition: 0.1s all;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: hsl(var(--theme-hue), var(--theme-saturation), 20%);
+}
+
+.sharp switch[selected]::before {
+  content: "check";
+  margin-right: 5px;
+  margin-left: 25px;
+  background-color: #fff;
+  width: 25px;
+  height: 25px;
+  color: hsl(var(--theme-hue), var(--theme-saturation), 20%);
+}
+
+@counter-style summary {
+  system: cyclic;
+  symbols: "\f612";
+  speak-as: bullets;
+  suffix: " ";
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    display: none;
+    translate: -10px 0;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+    display: flex;
+  }
+}
+
+@keyframes exit {
+  from {
+    opacity: 1;
+    translate: 0 0;
+    display: flex;
+  }
+
+  to {
+    opacity: 0;
+    translate: -10px 0;
+    display: none;
+  }
 }
 
 @media (max-width: 600px) {
@@ -222,5 +1102,22 @@ body.sharp {
 
   .sharp section {
     padding: 20px;
+  }
+
+  .sharp toast {
+    width: calc(100% - 100px);
+  }
+
+  .sharp pane,
+  .sharp main[pane] pane {
+    position: fixed;
+    top: 0;
+    width: calc(100% - 150px);
+    height: 100%;
+    right: 0;
+    left: initial;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 0;
   }
 }

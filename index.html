@@ -3,191 +3,79 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sharp</title>
+    <title>Sharp UI - Home</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
-
-    <style>
-      :root {
-        --theme-hue: 187;
-        --theme-saturation: 100%;
-        --theme-luminosity: 50%;
-
-        --theme-secondary-hue: 160;
-        --theme-secondary-saturation: 100%;
-        --theme-secondary-luminosity: 75%;
-      }
-    </style>
   </head>
-
   <body class="sharp">
-    <section class="sharp-header">
-      <h1>Welcome to Sharp UI</h1>
-      <p>This is a simple HTML page.</p>
-    </section>
+    <nav-rail>
+      <FAB tabindex="0"><icon>search</icon></FAB>
 
-    <h2>Buttons</h2>
-    <p>There are 4 types of buttons:</p>
-    <ul>
-      <li>Filled</li>
-      <li>Outlined</li>
-      <li>Tonal</li>
-      <li>Normal</li>
-    </ul>
-    <p>
-      Aditionally, you can add <code>elevated</code> and/or <code>main</code>.
-      Elevated buttons seem lifted off the ground, and main buttons are supposed
-      to be the only button or the main button on the page.
-    </p>
+      <nav-item selected tabindex="0" onclick="location.assign('/')"
+        ><icon>home</icon>Home</nav-item
+      >
 
-    <button filled>Filled</button>
-    <button outlined>Outlined</button>
-    <button tonal>Tonal</button>
-    <button>Normal</button>
+      <nav-item for="components-drawer" tabindex="0"
+        ><icon>interests</icon>Components</nav-item
+      >
+      <nav-drawer id="components-drawer">
+        <h4>Buttons</h4>
+        <nav-item onclick="location.assign('/buttons.html')">Buttons</nav-item>
+        <nav-item onclick="location.assign('/button-groups.html')"
+          >Button Groups</nav-item
+        >
+        <nav-item onclick="location.assign('/segmented-button.html')"
+          >Segmented Button</nav-item
+        >
 
-    <h3>Buttons with Variants</h3>
+        <hr />
+        <nav-item onclick="location.assign('/progressbars.html')"
+          >Progressbars</nav-item
+        >
+        <nav-item onclick="location.assign('/sliders.html')">Sliders</nav-item>
+      </nav-drawer>
 
-    <button filled elevated>Filled Elevated</button>
-    <button filled main>Filled Main</button>
-    <button outlined elevated>Outlined Elevated</button>
-    <button outlined main>Outlined Main</button>
-    <button tonal elevated>Tonal Elevated</button>
-    <button tonal main>Tonal Main</button>
-    <button elevated>Elevated</button>
-    <button main>Main</button>
+      <nav-item tabindex="0"><icon>lightbulb</icon>Examples</nav-item>
+    </nav-rail>
+    <main>
+      <section class="sharp-header" secondary>
+        <h1>Welcome to Sharp UI</h1>
+        <p>A simple UI component library demo. Select a component to view:</p>
+      </section>
+      <ul>
+        <li><a href="buttons.html">Buttons</a></li>
+        <li><a href="button-groups.html">Button Groups</a></li>
+        <li><a href="progressbar-slider.html">Progressbar & Slider</a></li>
+        <li><a href="music-player.html">Music Player Example</a></li>
+      </ul>
+      <section class="sharp-header" secondary>
+        <h1>Welcome to Sharp UI</h1>
+        <p>A simple UI component library demo. Select a component to view:</p>
+      </section>
+      <ul>
+        <li><a href="buttons.html">Buttons</a></li>
+        <li><a href="button-groups.html">Button Groups</a></li>
+        <li><a href="progressbar-slider.html">Progressbar & Slider</a></li>
+        <li><a href="music-player.html">Music Player Example</a></li>
+      </ul>
+    </main>
 
-    <h3>Usage</h3>
-    <p>You can use the buttons in your HTML like this:</p>
-    <pre>
-    <code-block>&lt;button filled&gt;Filled&lt;/button&gt;
-
-&lt;button outlined&gt;Outlined&lt;/button&gt;
-
-&lt;button tonal&gt;Tonal&lt;/button&gt;
-
-&lt;button&gt;Normal&lt;/button&gt;
-
-&lt;button main&gt;Main&lt;/button&gt;
-
-&lt;button elevated&gt;Elevated&lt;/button&gt;
-
-&lt;button main tonal&gt;Main Tonal&lt;/button&gt;
-
-&lt;button elevated outlined&gt;Elevated Outlined&lt;/button&gt;</code-block></pre>
-
-    <hr />
-
-    <h2>Button Groups</h2>
-    <p>
-      Button groups are used to group related buttons together. They can be used
-      to create a toolbar or a set of related actions. There are two types of
-      button groups: <b>selectable</b> and <b>connected</b>.
-    </p>
-
-    <br />
-
-    <h3>Selectable</h3>
-
-    <p>
-      Selectable button groups are used to group <b>selectable</b> buttons that
-      are related.
-    </p>
-
-    <br />
-
-    <p>This is a <b>normal</b>, <b>selectable</b> button group:</p>
-
-    <button-group selectable>
-      <button>Button 1</button>
-      <button selected>Button 2</button>
-      <button>Button 3</button>
-      <button>Button 4</button>
-      <button selected>Button 5</button>
-    </button-group>
-
-    <br />
-
-    <h3>Seperate</h3>
-
-    <p>
-      Seperate button groups are used to group multiple actions that are
-      related.
-    </p>
-
-    <p>
-      This is a <b>rounded</b> <b>non-</b>selectable button group that uses the
-      <b>secondary</b> color scheme:
-    </p>
-
-    <button-group secondary rounded>
-      <button>Button 1</button>
-      <button>Button 2</button>
-      <button>Button 3</button>
-      <button>Button 4</button>
-      <button>Button 5</button>
-    </button-group>
-
-    <br />
-
-    <h3>Connected</h3>
-
-    <p>
-      Connected button groups are used to group buttons that are related and
-      should be connected together. They are used when the user needs to select
-      one option from a set of options.
-    </p>
-
-    <button-group connected>
-      <button>Button 1</button>
-      <button>Button 2</button>
-      <button>Button 3</button>
-      <button selected>Button 4</button>
-      <button>Button 5</button>
-    </button-group>
-
-    <br />
-    <br />
-
-    <h3>Usage</h3>
-
-    <p>You can use the button groups in your HTML like this:</p>
-
-    <pre>
-    <code-block>&lt;!-- Normal button group --&gt;
-
-&lt;button-group&gt;
-  &lt;button&gt;Button 1&lt;/button&gt;
-  &lt;button selected&gt;Button 2&lt;/button&gt;
-  &lt;button&gt;Button 3&lt;/button&gt;
-  &lt;button&gt;Button 4&lt;/button&gt;
-  &lt;button selected&gt;Button 5&lt;/button&gt;
-&lt;/button-group&gt;
-
-
-&lt;!-- Normal button group with rounded corners --&gt;
-
-&lt;button-group rounded&gt;
-  &lt;button selected&gt;Button 1&lt;/button&gt;
-  &lt;button&gt;Button 2&lt;/button&gt;
-  &lt;button selected&gt;Button 3&lt;/button&gt;
-  &lt;button&gt;Button 4&lt;/button&gt;
-  &lt;button&gt;Button 5&lt;/button&gt;
-&lt;/button-group&gt;
-
-
-&lt;!-- Connected button group --&gt;
-
-&lt;button-group connected&gt;
-  &lt;button&gt;Button 1&lt;/button&gt;
-  &lt;button&gt;Button 2&lt;/button&gt;
-  &lt;button&gt;Button 3&lt;/button&gt;
-  &lt;button selected&gt;Button 4&lt;/button&gt;
-  &lt;button&gt;Button 5&lt;/button&gt;
-&lt;/button-group&gt;
-</code-block></pre>
-
-    <hr />
-
-    <h2>Progressbars</h2>
+    <pane style="width: 100%">
+      <h3>Hello</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Non repellat
+        cumque exercitationem ut alias, nemo quaerat voluptas quas voluptates
+        sapiente dicta animi minima eveniet excepturi dolorem repellendus
+        dignissimos. Maxime doloribus voluptas, rerum, cupiditate delectus
+        minima dolor animi tempore, incidunt iure asperiores nobis. Ipsum
+        commodi, molestiae debitis accusamus magni, architecto sed doloremque
+        modi quis porro dolores, soluta dicta illum quo eius a animi. Quibusdam,
+        sunt cum aspernatur alias accusantium consectetur deleniti unde soluta
+        modi nulla nobis officiis tempora dolorum animi voluptas similique iure
+        repudiandae harum. Nesciunt consequuntur officiis maxime quibusdam,
+        eveniet quod nobis placeat odio, corporis fugiat, soluta amet! Voluptas,
+        obcaecati.
+      </p>
+    </pane>
   </body>
 </html>

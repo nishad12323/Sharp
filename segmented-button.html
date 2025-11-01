@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Segmented Buttons - Sharp UI</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="sharp">
+    <nav-rail>
+      <FAB tabindex="0"><icon>search</icon></FAB>
+
+      <nav-item selected tabindex="0" onclick="location.assign('/')"
+        ><icon>home</icon>Home</nav-item
+      >
+
+      <nav-item for="components-drawer" tabindex="0"
+        ><icon>interests</icon>Components</nav-item
+      >
+      <nav-drawer id="components-drawer">
+        <h4>Buttons</h4>
+        <nav-item onclick="location.assign('/buttons.html')">Buttons</nav-item>
+        <nav-item onclick="location.assign('/button-groups.html')"
+          >Button Groups</nav-item
+        >
+        <nav-item onclick="location.assign('/segmented-button.html')"
+          >Segmented Button</nav-item
+        >
+
+        <hr />
+        <nav-item onclick="location.assign('/progressbars.html')"
+          >Progressbars</nav-item
+        >
+        <nav-item onclick="location.assign('/sliders.html')">Sliders</nav-item>
+      </nav-drawer>
+
+      <nav-item tabindex="0"><icon>lightbulb</icon>Examples</nav-item>
+    </nav-rail>
+
+    <main>
+      <section class="sharp-header">
+        <h1>Segmented Buttons</h1>
+        <p>
+          Segmented buttons are a way for the user to select from a list of
+          options. They are usually used for sort or view options.
+        </p>
+      </section>
+
+      <h2 id="try-it">Try it</h2>
+      <h3>Icon segmented button</h3>
+      <segmented-button>
+        <sb-option selected><icon>view_list</icon></sb-option>
+        <sb-option><icon>view_module</icon></sb-option>
+      </segmented-button>
+
+      <h3>Text segmented button</h3>
+      <segmented-button>
+        <sb-option selected>List</sb-option>
+        <sb-option>Grid</sb-option>
+      </segmented-button>
+
+      <h3>Icon-text segmented button</h3>
+      <segmented-button>
+        <sb-option selected><icon>view_list</icon>List</sb-option>
+        <sb-option><icon>view_module</icon>Grid</sb-option>
+      </segmented-button>
+
+      <h3>Multi-select text segmented button</h3>
+      <segmented-button multi-select>
+        <sb-option><icon>view_list</icon>List</sb-option>
+        <sb-option><icon>view_module</icon>Grid</sb-option>
+      </segmented-button>
+
+      <br />
+
+      <h2 id="table-of-contents">On this page:</h2>
+      <ol summary>
+        <li>
+          <a href="#try-it">Try it</a>
+          <ul details>
+            <li>Icon segmented button demo</li>
+            <li>Text segmented button demo</li>
+            <li>Icon-text segmented button demo</li>
+            <li>Multi-select text segmented button</li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#table-of-contents">Table of Contents</a>
+        </li>
+
+        <li>
+          <a href="#guidelines">Guidelines</a>
+        </li>
+
+        <li>
+          <a href="#usage">Usage</a>
+        </li>
+
+        <li>
+          <a href="#anatomy">Anatomy</a>
+        </li>
+
+        <li>
+          <a href="#syntax">Syntax</a>
+        </li>
+
+        <li>
+          <a href="#modifiers">Modifiers</a>
+          <ul details>
+            <li>Global Attributes</li>
+            <li>Selected</li>
+            <li>Expand</li>
+            <li>Multi-select</li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#summary">Summary</a>
+        </li>
+      </ol>
+
+      <br />
+      <section>
+        <p>Published by Nishad Bangole</p>
+        <p>Aug 8, 2025</p>
+        <br />
+        <button
+          onclick="navigator.share({title: 'Segmented Buttons - Sharp UI', url: location.href})"
+        >
+          <icon>share</icon>Share
+        </button>
+      </section>
+
+      <br />
+
+      <h0 id="intro">Segmented Buttons</h0>
+      <p>
+        Segmented buttons are a way for the user to select from a list of
+        options. They are usually used for sort or view options.
+      </p>
+
+      <img
+        src="Assets/segmented-button.png"
+        alt="segmented button"
+        class="full-width"
+      />
+      <br />
+
+      <h2 id="guidelines">Guidelines</h2>
+      <ul summary>
+        <li>
+          Segmented buttons can have icon options, text options, or icon-text
+          options.
+        </li>
+        <li>Use segmented buttons with 2-4 options <b>ONLY</b>.</li>
+        <li>
+          Segmented buttons must show a checked icon when selected to show its
+          state.
+        </li>
+      </ul>
+
+      <br />
+
+      <h2 id="usage">Usage</h2>
+      <ul summary>
+        <li>
+          Segmented buttons can contain <code>&lt;icon&gt;</code> tags for
+          icons.
+        </li>
+        <li>Use segmented buttons to group sorting or view options.</li>
+        <li>
+          Segmented buttons should not call much attention to themselves and
+          shoudn't be the center of attention.
+        </li>
+      </ul>
+
+      <h2 id="Anatomy">Anatomy</h2>
+      <img
+        src="Assets/segmented-button-anatomy.png"
+        alt="Anatomy of a segmented button."
+        class="full-width"
+      />
+
+      <br />
+
+      <h2 id="syntax">Syntax</h2>
+      <code-block
+        >&lt;segmented-button&gt;<br />
+        &nbsp;&lt;sb-option&gt;option text&lt;/sb-option&gt;<br />
+        &nbsp;&lt;sb-option&gt;option text&lt;/sb-option&gt;<br />
+        &lt;/segmented-button&gt;
+      </code-block>
+      <p>
+        <b summary><i>text</i></b
+        >: The text that is visible on the page. This can also be an icon.
+      </p>
+
+      <br />
+
+      <h2 id="modifiers">Modifiers</h2>
+
+      <h3>Global Attributes</h3>
+      <p>
+        Global attributes are attributes that apply to all components of Sharp
+        UI.
+      </p>
+
+      <code-block>
+        &lt;segmented-button <b>attribute</b>=<b>"value"</b>&gt;<br />
+        &nbsp;&lt;sb-option&gt;option text&lt;/sb-option&gt;<br />
+        &nbsp;&lt;sb-option&gt;option text&lt;/sb-option&gt;<br />
+        &lt;/segmented-button&gt;
+      </code-block>
+
+      <p>
+        <b summary><i>attribute</i></b> and <b summary><i>value</i></b
+        >: A global attribute and a value.
+      </p>
+
+      <br />
+
+      <h3>Selected</h3>
+      <p>
+        The selected boolean attribute shows whether or not the
+        <code>&lt;sb-option&gt;</code> element has a selected state. It can also
+        be set, to set the state of a segment.
+      </p>
+
+      <code-block
+        >&lt;segmented-button&gt;<br />
+        &nbsp;&lt;sb-option <b>selected</b>&gt;option text&lt;/sb-option&gt;<br />
+        &nbsp;&lt;sb-option&gt;option text&lt;/sb-option&gt;<br />
+        &lt;/segmented-button&gt;
+      </code-block>
+
+      <br />
+
+      <h3>Expand</h3>
+      <p>
+        The expand boolean attribute of the
+        <code>&lt;segmented-button&gt;</code> element tells Sharp that each
+        segment must expand to fill the available space. It is needed if you
+        want to set a fixed width.
+      </p>
+
+      <code-block
+        >&lt;segmented-button <b>expand</b>&gt;<br />
+        &nbsp;&lt;sb-option&gt;option text&lt;/sb-option&gt;<br />
+        &nbsp;&lt;sb-option&gt;option text&lt;/sb-option&gt;<br />
+        &lt;/segmented-button&gt;
+      </code-block>
+
+      <br />
+
+      <h3>Multi-select</h3>
+      <p>
+        The multi-select boolean attribute of the
+        <code>&lt;segmented-button&gt;</code> element tells Sharp that the user
+        is allowed to select multiple options.
+      </p>
+
+      <code-block
+        >&lt;segmented-button <b>multi-select</b>&gt;<br />
+        &nbsp;&lt;sb-option&gt;option text&lt;/sb-option&gt;<br />
+        &nbsp;&lt;sb-option&gt;option text&lt;/sb-option&gt;<br />
+        &lt;/segmented-button&gt;
+      </code-block>
+
+      <br />
+
+      <h2>Summary</h2>
+
+      <ul summary>
+        <li>Segmented buttons allow users to select from multiple options.</li>
+        <li>Options can be icons, text, or both.</li>
+        <li>Use segmented buttons for sorting or view choices.</li>
+        <li>Limit segmented buttons to 2-4 options for clarity.</li>
+        <li>
+          Selected options should display a checked icon for state indication.
+        </li>
+        <li>
+          Attributes like <code>selected</code>, <code>multi-select</code>, and
+          <code>expand</code> modify behavior and appearance.
+        </li>
+      </ul>
+
+      <footer filled>
+        <p>&copy; 2025 Sharp UI. All rights reserved.</p>
+        <nav>
+          <a href="/">Home</a> | <a href="/components.html">Components</a> |
+          <a href="/about.html">About</a>
+        </nav>
+      </footer>
+    </main>
+  </body>
+</html>

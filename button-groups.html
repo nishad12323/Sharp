@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Button Groups - Sharp UI</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="sharp">
+    <nav-rail>
+      <FAB tabindex="0"><icon>search</icon></FAB>
+
+      <nav-item selected tabindex="0" onclick="location.assign('/')"
+        ><icon>home</icon>Home</nav-item
+      >
+
+      <nav-item for="components-drawer" tabindex="0"
+        ><icon>interests</icon>Components</nav-item
+      >
+      <nav-drawer id="components-drawer">
+        <h4>Buttons</h4>
+        <nav-item onclick="location.assign('/buttons.html')">Buttons</nav-item>
+        <nav-item onclick="location.assign('/button-groups.html')"
+          >Button Groups</nav-item
+        >
+        <nav-item onclick="location.assign('/segmented-button.html')"
+          >Segmented Button</nav-item
+        >
+
+        <hr />
+        <nav-item onclick="location.assign('/progressbars.html')"
+          >Progressbars</nav-item
+        >
+        <nav-item onclick="location.assign('/sliders.html')">Sliders</nav-item>
+      </nav-drawer>
+
+      <nav-item tabindex="0"><icon>lightbulb</icon>Examples</nav-item>
+    </nav-rail>
+
+    <main>
+      <section class="sharp-header">
+        <h1>Button Groups</h1>
+        <p>
+          Button groups are used to group related buttons together. There are
+          three types: <b>separate</b>, <b>toggle</b>, and <b>connected</b>.
+        </p>
+      </section>
+
+      <h2 id="try-it">Try it</h2>
+      <h3>Separate</h3>
+      <button-group secondary rounded>
+        <button>Button 1</button>
+        <button>Button 2</button>
+        <button>Button 3</button>
+        <button>Button 4</button>
+        <button>Button 5</button>
+      </button-group>
+
+      <h3>Toggle</h3>
+      <button-group toggle tonal-filled>
+        <button>Button 1</button>
+        <button selected>Button 2</button>
+        <button>Button 3</button>
+        <button>Button 4</button>
+        <button selected>Button 5</button>
+      </button-group>
+
+      <h3>Connected</h3>
+      <button-group connected>
+        <button>Button 1</button>
+        <button>Button 2</button>
+        <button>Button 3</button>
+        <button>Button 4</button>
+        <button>Button 5</button>
+      </button-group>
+
+      <h2 id="table-of-contents">On this page:</h2>
+      <ol summary>
+        <li>
+          <a href="#try-it">Try it</a>
+          <ul details>
+            <li>Separate button group demo</li>
+            <li>Toggle button group demo</li>
+            <li>Connected button group demo</li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#table-of-contents">Table of Contents</a>
+        </li>
+
+        <li>
+          <a href="#guidelines">Guidelines</a>
+        </li>
+
+        <li>
+          <a href="#usage">Usage</a>
+        </li>
+
+        <li>
+          <a href="#anatomy">Anatomy</a>
+        </li>
+
+        <li>
+          <a href="#syntax">Syntax</a>
+        </li>
+
+        <li>
+          <a href="#modifiers">Modifiers</a>
+          <ul details>
+            <li>Global Attributes</li>
+            <li>Toggle</li>
+            <li>Connected</li>
+            <li>Separate</li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#summary">Summary</a>
+        </li>
+      </ol>
+
+      <br />
+      <section>
+        <p>Published by Nishad Bangole</p>
+        <p>Aug 11, 2025</p>
+        <br />
+        <button
+          onclick="navigator.share({title: 'Button Groups - Sharp UI', url: location.href})"
+        >
+          <icon>share</icon>Share
+        </button>
+      </section>
+
+      <h2 id="guidelines">Guidelines</h2>
+      <ul summary>
+        <li>Button groups can be separate, toggle, or connected.</li>
+        <li>Use button groups to group related actions together.</li>
+        <li>Ensure button groups are visually distinct and easy to use.</li>
+      </ul>
+
+      <h2 id="usage">Usage</h2>
+      <ul summary>
+        <li>Use button groups to group related buttons together.</li>
+        <li>Toggle button groups allow selecting one or more options.</li>
+        <li>Connected button groups visually link buttons together.</li>
+      </ul>
+
+      <h2 id="anatomy">Anatomy</h2>
+      <img
+        src="Assets/segmented-button-anatomy.png"
+        alt="Anatomy of a button group."
+        class="full-width"
+      />
+
+      <h2 id="syntax">Syntax</h2>
+      <code-block
+        >&lt;button-group&gt;<br />
+        &nbsp;&lt;button&gt;Button 1&lt;/button&gt;<br />
+        &nbsp;&lt;button&gt;Button 2&lt;/button&gt;<br />
+        &lt;/button-group&gt;
+      </code-block>
+
+      <h2 id="modifiers">Modifiers</h2>
+
+      <h3>Toggle</h3>
+      <p>
+        The <b>toggle</b> attribute allows the user to select one or more
+        buttons in the group.
+      </p>
+
+      <code-block>
+        &lt;button-group <b>toggle</b>&gt;<br />
+        &nbsp;&lt;button&gt;Button 1&lt;/button&gt;<br />
+        &nbsp;&lt;button <b>selected</b>&gt;Button 2&lt;/button&gt;<br />
+        &lt;/button-group&gt;
+      </code-block>
+
+      <h3>Connected</h3>
+      <p>
+        The <b>connected</b> attribute visually links buttons together in a
+        group.
+      </p>
+
+      <code-block>
+        &lt;button-group <b>connected</b>&gt;<br />
+        &nbsp;&lt;button&gt;Button 1&lt;/button&gt;<br />
+        &nbsp;&lt;button&gt;Button 2&lt;/button&gt;<br />
+        &lt;/button-group&gt;
+      </code-block>
+
+      <h3>Elevated</h3>
+      <p>The <b>elevated</b> attribute applies a shadow to the button.</p>
+
+      <code-block>
+        &lt;button-group <b>rounded</b>&gt;<br />
+        &nbsp;&lt;button&gt;Button 1&lt;/button&gt;<br />
+        &nbsp;&lt;button&gt;Button 2&lt;/button&gt;<br />
+        &lt;/button-group&gt;
+      </code-block>
+
+      <h3>
+        Vertical
+        <button
+          tonal
+          secondary
+          m
+          title="This is experimental technology. Use with caution."
+        >
+          <icon>experiment</icon>Experimental
+        </button>
+      </h3>
+      <p>
+        The <b>vertical</b> attribute arranges the buttons in a column instead
+        of a row.
+      </p>
+
+      <code-block>
+        &lt;button-group <b>vertical</b>&gt;<br />
+        &nbsp;&lt;button&gt;Button 1&lt;/button&gt;<br />
+        &nbsp;&lt;button&gt;Button 2&lt;/button&gt;<br />
+        &lt;/button-group&gt;
+      </code-block>
+
+      <h3>Tonal Normal</h3>
+      <p>
+        The <b>tonal-normal</b> attribute applies a tonal style to the buttons
+        in the group.
+      </p>
+
+      <code-block>
+        &lt;button-group toggle <b>tonal-normal</b>&gt;<br />
+        &nbsp;&lt;button&gt;Button 1&lt;/button&gt;<br />
+        &nbsp;&lt;button&gt;Button 2&lt;/button&gt;<br />
+        &lt;/button-group&gt;
+      </code-block>
+
+      <h3>Tonal Filled</h3>
+      <p>
+        The <b>tonal-filled</b> attribute applies a filled tonal style to the
+        buttons in the group.
+      </p>
+
+      <code-block>
+        &lt;button-group toggle <b>tonal-filled</b>&gt;<br />
+        &nbsp;&lt;button&gt;Button 1&lt;/button&gt;<br />
+        &nbsp;&lt;button&gt;Button 2&lt;/button&gt;<br />
+        &lt;/button-group&gt;
+      </code-block>
+
+      <h3>Selected</h3>
+      <p>
+        The <b>selected</b> attribute indicates the selected state of a button
+        in the group.
+      </p>
+
+      <code-block>
+        &lt;button-group toggle&gt;<br />
+        &nbsp;&lt;button <b>selected</b>&gt;Button 1&lt;/button&gt;<br />
+        &nbsp;&lt;button&gt;Button 2&lt;/button&gt;<br />
+        &lt;/button-group&gt;
+      </code-block>
+
+      <br />
+
+      <h2 id="summary">Summary</h2>
+      <ul summary>
+        <li>Button groups group related buttons together.</li>
+        <li>They can be separate, toggle, or connected.</li>
+        <li>
+          Use attributes like toggle, connected, and separate to modify
+          behavior.
+        </li>
+      </ul>
+
+      <footer filled>
+        <p>&copy; 2025 Sharp UI. All rights reserved.</p>
+        <nav>
+          <a href="/">Home</a> | <a href="/components.html">Components</a> |
+          <a href="/about.html">About</a>
+        </nav>
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sharp UI - Music Player Example</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="sharp">
+    <nav-rail>
+      <FAB><icon>search</icon></FAB>
+      <nav-item selected><icon>home</icon>Home</nav-item>
+    </nav-rail>
+    <main pane>
+      <a href="/">&larr; Home</a>
+      <h2>Music Player Example</h2>
+      <div secondary class="music-player flex" style="gap: 10px">
+        <div class="music-player-art">
+          <img
+            src="Assets/Backdrop.png"
+            alt="Album Art"
+            fit-cover
+            rounded
+            class="full-width full-height"
+          />
+        </div>
+        <div>
+          <div>
+            <h1>A Very, Very Long Song Title</h1>
+            <h4>Artist Name</h4>
+          </div>
+          <input type="range" min="0" max="100" value="30" class="full-width" />
+          <button-group seperate class="full-width">
+            <button tonal><icon>fast_rewind</icon></button>
+            <button main toggle normal-filled>
+              <icon>pause</icon><icon selected outlined>play_arrow</icon>
+            </button>
+            <button tonal><icon>fast_forward</icon></button>
+          </button-group>
+        </div>
+      </div>
+      <button toggle id="micBtn" type="button" shape-morph>
+        <icon>mic</icon>
+        <icon selected>mic_off</icon>
+      </button>
+    </main>
+  </body>
+</html>
