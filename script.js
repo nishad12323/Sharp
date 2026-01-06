@@ -90,6 +90,9 @@ sharp = {
     this.button = button;
     this.onButtonClick = (event) => {};
     this.toast = document.querySelector("toast");
+    this.toast.innerHTML = "";
+    this.toast.style.opacity = 100;
+    this.toast.style.translate = "0 0";
     this.show = (duration) => {
       let p = document.createElement("p");
       p.textContent = text;
@@ -137,7 +140,10 @@ sharp.Toast.toast = document.createElement("toast");
 document.body.appendChild(sharp.Toast.toast);
 
 setTimeout(() => {
-  x = new sharp.Toast("Simple toast.", "Click Me!", 1);
+  x = new sharp.Toast("Simple toast.", "Close", 1);
+  x.onButtonClick = (e) => {
+    new sharp.Toast("You clicked the button!", null, 0).show(2);
+  };
   x.show(2);
 }, 1000);
 

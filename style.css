@@ -131,7 +131,7 @@ main {
   color: hsl(var(--theme-hue), var(--theme-saturation), 0%);
 }
 
-body.sharp {
+.sharp {
   margin: 0;
   padding: 50px;
   background-color: hsl(var(--theme-secondary-hue),
@@ -140,13 +140,14 @@ body.sharp {
 
   padding-top: 0;
   scrollbar-width: none;
+  overflow-y: scroll;
 }
 
-body.sharp:not(:has(footer)) {
+.sharp:not(:has(footer)) {
   padding-bottom: 150px;
 }
 
-body.sharp:has(> main):has(> nav-rail) {
+.sharp:has(> main):has(> nav-rail) {
   display: flex;
   padding: 0;
 }
@@ -166,7 +167,7 @@ body.sharp:has(> main):has(> nav-rail) {
   padding-bottom: 0;
 }
 
-body.sharp:has(> main[pane]) {
+.sharp:has(> main[pane]) {
   background-color: hsl(var(--theme-secondary-hue),
       var(--theme-secondary-saturation),
       95%);
@@ -433,7 +434,7 @@ section main {
   border-radius: 15px;
   overflow-x: auto;
   font-family: "Consolas", Courier, monospace;
-  border: 1px solid black;
+  ]
 }
 
 .sharp code-block::before {
