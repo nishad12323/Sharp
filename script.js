@@ -199,7 +199,7 @@ document.querySelectorAll("nav-item:has(+ nav-drawer)").forEach((navItem) => {
       document.querySelectorAll("nav-item + nav-drawer").forEach((drawer) => {
         drawer.style.display = "none";
       });
-      navItem.nextElementSibling.style.animationName = "enter";
+      navItem.nextElementSibling.style.animationName = "enter-from-nav";
       navItem.nextElementSibling.style.animationDuration = "0.1s";
       navItem.nextElementSibling.style.display = "flex";
     }
@@ -212,7 +212,7 @@ document.querySelectorAll("nav-item:has(+ nav-drawer)").forEach((navItem) => {
 //     navItem.addEventListener("mouseover", (e) => {
 //       if (navItem.tagName.toLowerCase() == "nav-item") {
 //         document.querySelectorAll("nav-item + nav-drawer").forEach((drawer) => {
-//           drawer.style.animationName = "exit";
+//           drawer.style.animationName = "exit-to-nav";
 //           drawer.style.animationDuration = "0.1s";
 //           drawer.style.display = "none";
 //         });
@@ -223,7 +223,7 @@ document.querySelectorAll("nav-item:has(+ nav-drawer)").forEach((navItem) => {
 document.querySelectorAll("main, pane").forEach((parent) => {
   parent.addEventListener("mouseover", (e) => {
     document.querySelectorAll("nav-item + nav-drawer").forEach((drawer) => {
-      drawer.style.animationName = "exit";
+      drawer.style.animationName = "exit-to-nav";
       drawer.style.animationDuration = "0.1s";
       drawer.style.display = "none";
     });

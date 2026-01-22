@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buttons - Sharp UI</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="sharp">
+    <nav-rail>
+      <FAB tabindex="0"><icon>search</icon></FAB>
+
+      <nav-item tabindex="0" onclick="location.assign('/')"
+        ><icon>home</icon>Home</nav-item
+      >
+
+      <nav-item selected for="components-drawer" tabindex="0"
+        ><icon>interests</icon>Components</nav-item
+      >
+      <nav-drawer id="components-drawer">
+        <h4>Buttons</h4>
+        <nav-item onclick="location.assign('/buttons.html')">
+          Buttons
+        </nav-item>
+        <nav-item onclick="location.assign('/button-groups.html')"
+          >Button Groups</nav-item
+        >
+        <nav-item onclick="location.assign('/segmented-button.html')"
+          >Segmented Button</nav-item
+        >
+
+        <hr />
+        <nav-item onclick="location.assign('/progressbars.html')"
+          >Progressbars</nav-item
+        >
+        <nav-item onclick="location.assign('/sliders.html')">Sliders</nav-item>
+      </nav-drawer>
+
+      <nav-item tabindex="0"><icon>lightbulb</icon>Examples</nav-item>
+    </nav-rail>
+
+    <main>
+      <button-group shape-morph rounded>
+        <button toggle selected>
+          <icon selected>mic</icon>
+          <icon>mic_off</icon>
+        </button>
+        <button toggle>
+          <icon selected>videocam</icon>
+          <icon>videocam_off</icon>
+        </button>
+        <button toggle>
+          <icon>screen_share</icon>
+        </button>
+        <button toggle tonal-filled>
+          <icon>more_vert</icon>
+        </button>
+        <button danger filled>
+          <icon>call_end</icon>
+          End
+        </button>
+      </button-group>
+    </main>
+  </body>
+</html>

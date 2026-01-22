@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buttons - Sharp UI</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="sharp">
+    <nav-rail>
+      <FAB tabindex="0"><icon>search</icon></FAB>
+
+      <nav-item tabindex="0" onclick="location.assign('/')"
+        ><icon>home</icon>Home</nav-item
+      >
+
+      <nav-item selected for="components-drawer" tabindex="0"
+        ><icon>interests</icon>Components</nav-item
+      >
+      <nav-drawer id="components-drawer">
+        <h4>Buttons</h4>
+        <nav-item onclick="location.assign('/buttons.html')">
+          Buttons
+        </nav-item>
+        <nav-item onclick="location.assign('/button-groups.html')"
+          >Button Groups</nav-item
+        >
+        <nav-item onclick="location.assign('/segmented-button.html')"
+          >Segmented Button</nav-item
+        >
+
+        <hr />
+        <nav-item onclick="location.assign('/progressbars.html')"
+          >Progressbars</nav-item
+        >
+        <nav-item onclick="location.assign('/sliders.html')">Sliders</nav-item>
+      </nav-drawer>
+
+      <nav-item tabindex="0"><icon>lightbulb</icon>Examples</nav-item>
+    </nav-rail>
+
+    <main no-padding>
+      <!-- <padding>
+        <section>
+          <h3>Settings</h3>
+          <list>
+            <list-item>
+              <icon>wifi</icon>
+              Connections
+              <description>Wi-Fi, mobile data</description>
+            </list-item>
+            <list-item>
+              <icon>bluetooth</icon>
+              Bluetooth
+              <description>On, connected</description>
+            </list-item>
+            <list-divider></list-divider>
+            <list-item>
+              <icon>battery_3_bar</icon>
+              Battery
+              <description>85% - Charging</description>
+            </list-item>
+            <list-item>
+              <icon>brightness_high</icon>
+              Display
+              <description>Adaptive brightness, always-on</description>
+            </list-item>
+            <list-divider></list-divider>
+            <list-item>
+              <icon>notifications</icon>
+              Notifications
+              <description>App notifications, do not disturb</description>
+            </list-item>
+            <list-item>
+              <icon>security</icon>
+              Security
+              <description>Screen lock, fingerprint</description>
+            </list-item>
+            <list-item>
+              <icon>storage</icon>
+              Storage
+              <description>Internal storage, SD card</description>
+            </list-item>
+            <list-item>
+              <icon>language</icon>
+              Language & Input
+              <description>Preferred language, keyboard</description>
+            </list-item>
+            <list-divider></list-divider>
+            <list-item>
+              <icon>update</icon>
+              System Update
+              <description>Last checked 2 days ago</description>
+            </list-item>
+            <list-item>
+              <icon>info</icon>
+              About
+            </list-item>
+          </list>
+        </section>
+      </padding> -->
+
+      <list>
+        <h3>Settings</h3>
+
+        <list-item>
+          <icon>wifi</icon>
+          Connections
+          <description>Wi-Fi, mobile data</description>
+        </list-item>
+        <list-item>
+          <icon>bluetooth</icon>
+          Bluetooth
+          <description>On, connected</description>
+        </list-item>
+        <list-divider></list-divider>
+        <list-item>
+          <icon>battery_3_bar</icon>
+          Battery
+          <description>67% - Charging</description>
+        </list-item>
+        <list-item>
+          <icon>brightness_high</icon>
+          Display
+          <description>Adaptive brightness, always-on</description>
+        </list-item>
+        <list-divider></list-divider>
+        <list-item>
+          <icon>notifications</icon>
+          Notifications
+          <description>App notifications, do not disturb</description>
+        </list-item>
+        <list-item>
+          <icon>security</icon>
+          Security
+          <description>Screen lock, fingerprint</description>
+        </list-item>
+        <list-item>
+          <icon>storage</icon>
+          Storage
+          <description>Internal storage, SD card</description>
+        </list-item>
+        <list-item>
+          <icon>language</icon>
+          Language & Input
+          <description>Preferred language, keyboard</description>
+        </list-item>
+        <list-divider></list-divider>
+        <list-item>
+          <icon>update</icon>
+          System Update
+          <description>Last checked 2 days ago</description>
+        </list-item>
+        <list-item>
+          <icon>info</icon>
+          About
+        </list-item>
+      </list>
+    </main>
+  </body>
+</html>

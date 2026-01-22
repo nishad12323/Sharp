@@ -79,10 +79,50 @@ main {
   initial-value: 100%;
 }
 
+@property --current-hue {
+  syntax: "<integer>";
+  inherits: true;
+  initial-value: 160;
+}
+
+@property --current-saturation {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 100%;
+}
+
 @property --progress {
   syntax: "<percentage>";
   inherits: true;
   initial-value: 50%;
+}
+
+:root {
+  --current-hue: var(--theme-hue);
+  --current-saturation: var(--theme-saturation);
+}
+
+.sharp,
+.sharp *,
+.sharp[primary],
+.sharp [primary],
+.sharp [primary *] {
+  --current-hue: var(--theme-hue);
+  --current-saturation: var(--theme-saturation);
+}
+
+.sharp[secondary],
+.sharp [secondary],
+.sharp [secondary] * {
+  --current-hue: var(--theme-secondary-hue);
+  --current-saturation: var(--theme-secondary-saturation);
+}
+
+.sharp[danger],
+.sharp [danger],
+.sharp [danger] * {
+  --current-hue: 0;
+  --current-saturation: 100%;
 }
 
 .sharp icon[filled],
@@ -127,20 +167,25 @@ main {
 }
 
 ::selection {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 50%);
-  color: hsl(var(--theme-hue), var(--theme-saturation), 0%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 50%);
+  color: hsl(var(--current-hue), var(--current-saturation), 0%);
 }
 
 .sharp {
   margin: 0;
-  padding: 50px;
-  background-color: hsl(var(--theme-secondary-hue),
-      var(--theme-secondary-saturation),
+  background-color: hsl(var(--current-hue),
+      var(--current-saturation),
       99%);
 
   padding-top: 0;
   scrollbar-width: none;
   overflow-y: scroll;
+  display: block;
+}
+
+.sharp padding {
+  padding: 0 50px;
+  display: block;
 }
 
 .sharp:not(:has(footer)) {
@@ -154,13 +199,16 @@ main {
 
 .sharp main {
   width: 100%;
-  padding: 50px;
-  background-color: hsl(var(--theme-secondary-hue),
-      var(--theme-secondary-saturation),
+  background-color: hsl(var(--current-hue),
+      var(--current-saturation),
       99%);
   flex-grow: 1;
   overflow-y: auto;
   height: 100vh;
+}
+
+.sharp main:not(:has(padding)):not([no-padding]) {
+  padding: 0 50px;
 }
 
 .sharp main:has(footer) {
@@ -168,8 +216,8 @@ main {
 }
 
 .sharp:has(> main[pane]) {
-  background-color: hsl(var(--theme-secondary-hue),
-      var(--theme-secondary-saturation),
+  background-color: hsl(var(--current-hue),
+      var(--current-saturation),
       95%);
 }
 
@@ -179,11 +227,14 @@ main {
   overflow: auto;
   height: calc(100vh - 50px);
   border-radius: 50px;
-  background-color: hsl(var(--theme-secondary-hue),
-      var(--theme-secondary-saturation),
+  background-color: hsl(var(--current-hue),
+      var(--current-saturation),
       99%);
-  padding: 50px;
   margin-left: 0;
+}
+
+.sharp pane:not(:has(padding)):not([no-padding]) {
+  padding: 0 50px;
 }
 
 .sharp nav-rail+main[pane],
@@ -193,14 +244,14 @@ main {
 
 .sharp main[pane]~pane,
 .sharp pane:has(main[pane]) {
-  background-color: hsl(var(--theme-secondary-hue),
-      var(--theme-secondary-saturation),
+  background-color: hsl(var(--current-hue),
+      var(--current-saturation),
       99%);
 }
 
 .sharp pane {
   width: 500px;
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 95%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 95%);
 }
 
 ::-webkit-scrollbar {
@@ -208,8 +259,8 @@ main {
 }
 
 .sharp button {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 50%);
-  color: hsl(var(--theme-hue), var(--theme-saturation), 20%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 50%);
+  color: hsl(var(--current-hue), var(--current-saturation), 20%);
   border: none;
   padding: 15px;
   border-radius: 100px;
@@ -227,36 +278,37 @@ main {
 }
 
 .sharp button[filled] {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 35%);
-  color: hsl(var(--theme-hue), var(--theme-saturation), 100%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 35%);
+  color: hsl(var(--current-hue), var(--current-saturation), 100%);
 }
 
 .sharp button:hover {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 65%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 65%);
 }
 
 .sharp button[filled]:hover {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 30%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 30%);
 }
 
 .sharp button[outlined] {
   background-color: transparent;
-  border: 1px solid black;
-  color: hsl(var(--theme-hue), var(--theme-saturation), 35%);
+  transition: all cubic-bezier(0.42, 2, 0.21, 1.1) 0.35s, background 0.1s ease-in-out;
+  border: 1.5px solid #ccc;
+  color: hsl(var(--current-hue), var(--current-saturation), 35%);
 }
 
 .sharp button[outlined]:hover {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 90%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 90%);
 }
 
 .sharp button[tonal] {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 90%);
-  color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 90%);
+  color: hsl(var(--current-hue), var(--current-saturation), 10%);
 }
 
 .sharp button[tonal]:hover {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 80%);
-  color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 80%);
+  color: hsl(var(--current-hue), var(--current-saturation), 10%);
 }
 
 .sharp button[main] {
@@ -281,8 +333,8 @@ main {
 .sharp section {
   border-radius: 30px;
   padding: 30px;
-  background-color: hsl(var(--theme-secondary-hue),
-      var(--theme-secondary-saturation),
+  background-color: hsl(var(--current-hue),
+      var(--current-saturation),
       90%);
   margin: 30px 0px;
 }
@@ -304,8 +356,8 @@ section main {
   &[light] {
     border-radius: 30px;
     padding: 30px;
-    background-color: hsl(var(--theme-secondary-hue),
-        var(--theme-secondary-saturation),
+    background-color: hsl(var(--current-hue),
+        var(--current-saturation),
         97%);
     margin: 30px 0px;
     border: none;
@@ -330,7 +382,7 @@ section main {
   border-radius: 30px 30px 0 0;
   padding: 30px;
   padding-bottom: 150px;
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 90%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 90%);
   margin: 30px 0px;
   margin-bottom: 0;
 }
@@ -345,7 +397,7 @@ section main {
 
 .sharp a,
 .sharp a:visited {
-  color: hsl(var(--theme-hue), var(--theme-saturation), 30%);
+  color: hsl(var(--current-hue), var(--current-saturation), 30%);
   text-decoration: underline;
   transition: none;
 }
@@ -356,7 +408,7 @@ section main {
 
 .sharp a:active {
   color: #fff;
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 30%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 30%);
 }
 
 .sharp h0 {
@@ -379,7 +431,7 @@ section main {
   margin-top: 50px;
   margin: 30px 0;
   width: 100%;
-  border-bottom: 8px solid hsla(var(--theme-hue), var(--theme-saturation), 20%, 0.5);
+  border-bottom: 8px solid hsla(var(--current-hue), var(--current-saturation), 20%, 0.5);
   padding-bottom: 10px;
   display: flex;
   align-items: center;
@@ -450,7 +502,7 @@ section main {
 
 .sharp hr {
   border: none;
-  border-top: 8px solid hsla(var(--theme-secondary-hue), var(--theme-secondary-saturation), 20%);
+  border-top: 8px solid hsla(var(--current-hue), var(--current-saturation), 20%);
   margin: 60px 0;
 }
 
@@ -466,13 +518,13 @@ section main {
 }
 
 .sharp button-group[toggle] button {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 90%);
-  color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 90%);
+  color: hsl(var(--current-hue), var(--current-saturation), 10%);
 }
 
 .sharp button-group[toggle] button:hover:not([selected]) {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 80%);
-  color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 80%);
+  color: hsl(var(--current-hue), var(--current-saturation), 10%);
 }
 
 .sharp button[selected]:not(.sharp button-group button) {
@@ -561,57 +613,57 @@ section main {
   padding-left: 85px;
 }
 
-.sharp button[toggle][tonal-normal],
+.sharp button[toggle][tonal-vibrant],
 .sharp button[toggle][tonal-filled],
-.sharp button-group[toggle][tonal-normal] button,
+.sharp button-group[toggle][tonal-vibrant] button,
 .sharp button-group[toggle][tonal-filled] button {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 90%);
-  color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 90%);
+  color: hsl(var(--current-hue), var(--current-saturation), 10%);
 }
 
-.sharp button[toggle][tonal-normal]:hover,
+.sharp button[toggle][tonal-vibrant]:hover,
 .sharp button[toggle][tonal-filled]:hover,
-.sharp button-group[toggle][tonal-normal] button:hover,
+.sharp button-group[toggle][tonal-vibrant] button:hover,
 .sharp button-group[toggle][tonal-filled] button:hover {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 80%);
-  color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 80%);
+  color: hsl(var(--current-hue), var(--current-saturation), 10%);
 }
 
-.sharp button[toggle][selected]:not([tonal-filled]):not([normal-filled]):not([tonal-normal]),
-.sharp button[toggle][selected][tonal-normal],
-.sharp button-group[toggle]:not([tonal-filled]):not([normal-filled]):not([tonal-normal]) button[selected],
-.sharp button-group[toggle][tonal-normal] button[selected] {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 65%);
-  color: hsl(var(--theme-hue), var(--theme-saturation), 20%);
+.sharp button[toggle][selected]:not([tonal-filled]):not([vibrant-filled]):not([tonal-vibrant]),
+.sharp button[toggle][selected][tonal-vibrant],
+.sharp button-group[toggle]:not([tonal-filled]):not([vibrant-filled]):not([tonal-vibrant]) button[selected],
+.sharp button-group[toggle][tonal-vibrant] button[selected] {
+  background-color: hsl(var(--current-hue), var(--current-saturation), 65%);
+  color: hsl(var(--current-hue), var(--current-saturation), 20%);
 }
 
-.sharp button[toggle][selected]:hover:not([tonal-filled]):not([normal-filled]):not([tonal-normal]),
-.sharp button[toggle][selected][tonal-normal]:hover,
-.sharp button-group[toggle]:not([tonal-filled]):not([normal-filled]):not([tonal-normal]) button[selected]:hover,
-.sharp button-group[toggle][tonal-normal] button[selected]:hover {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 65%);
-  color: hsl(var(--theme-hue), var(--theme-saturation), 20%);
+.sharp button[toggle][selected]:hover:not([tonal-filled]):not([vibrant-filled]):not([tonal-vibrant]),
+.sharp button[toggle][selected][tonal-vibrant]:hover,
+.sharp button-group[toggle]:not([tonal-filled]):not([vibrant-filled]):not([tonal-vibrant]) button[selected]:hover,
+.sharp button-group[toggle][tonal-vibrant] button[selected]:hover {
+  background-color: hsl(var(--current-hue), var(--current-saturation), 65%);
+  color: hsl(var(--current-hue), var(--current-saturation), 20%);
 }
 
 .sharp button[toggle][selected][tonal-filled],
-.sharp button[toggle][selected][normal-filled],
+.sharp button[toggle][selected][vibrant-filled],
 .sharp button-group[toggle][tonal-filled] button[selected],
-.sharp button-group[toggle][normal-filled] button[selected],
+.sharp button-group[toggle][vibrant-filled] button[selected],
 .sharp button-group[connected] button[selected] {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 35%);
-  color: hsl(var(--theme-hue), var(--theme-saturation), 100%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 35%);
+  color: hsl(var(--current-hue), var(--current-saturation), 100%);
 }
 
 .sharp button[toggle][selected][tonal-filled]:hover,
-.sharp button[toggle][selected][normal-filled]:hover,
+.sharp button[toggle][selected][vibrant-filled]:hover,
 .sharp button-group[toggle] button[selected][tonal-filled]:hover,
-.sharp button-group[toggle] button[selected][normal-filled]:hover {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 30%);
-  color: hsl(var(--theme-hue), var(--theme-saturation), 100%);
+.sharp button-group[toggle] button[selected][vibrant-filled]:hover {
+  background-color: hsl(var(--current-hue), var(--current-saturation), 30%);
+  color: hsl(var(--current-hue), var(--current-saturation), 100%);
 }
 
-.sharp button[toggle]:not([tonal-filled]):not([normal-filled]):not([tonal-normal]),
-.sharp button-group[toggle]:not([tonal-filled]):not([normal-filled]):not([tonal-normal]) button {
+.sharp button[toggle]:not([tonal-filled]):not([vibrant-filled]):not([tonal-vibrant]),
+.sharp button-group[toggle]:not([tonal-filled]):not([vibrant-filled]):not([tonal-vibrant]) button {
   background-color: #f0f0f0;
   color: #1f1f1f;
 }
@@ -646,7 +698,7 @@ section main {
 }
 
 .sharp toast {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 10%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 10%);
   padding: 10px 20px;
   visibility: hidden;
   display: flex;
@@ -682,11 +734,12 @@ section main {
 }
 
 .sharp progressbar::before {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 50%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 50%);
   height: 100%;
   width: var(--progress);
-  content: "";
+  font-family: "Material Symbols Outlined";
   border-radius: 100px;
+  content: "";
 }
 
 .sharp progressbar::after {
@@ -695,7 +748,7 @@ section main {
   width: calc(100% - var(--progress));
   content: "";
   border-radius: 100px;
-  border-right: 8px solid hsl(var(--theme-hue), var(--theme-saturation), 50%);
+  border-right: 8px solid hsl(var(--current-hue), var(--current-saturation), 50%);
 }
 
 .sharp progressbar:has(slider) {
@@ -704,6 +757,18 @@ section main {
 
 .sharp progressbar:has(slider)::before {
   border-radius: 10px;
+}
+
+.sharp progressbar:has(slider, [icon])::before {
+  height: calc(100% - 20px);
+  width: calc(var(--progress) - 20px);
+  content: attr(icon);
+  color: hsl(var(--current-hue),
+      var(--current-saturation),
+      20%);
+  font-size: 40px;
+  padding: 10px 10px;
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 .sharp progressbar:has(slider)::after {
@@ -724,22 +789,26 @@ section main {
 }
 
 .sharp progressbar slider {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 50%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 50%);
   height: 100%;
-  width: 5px;
+  width: 10px;
   border-radius: 10px;
   cursor: ew-resize;
   transition: 0.1s ease-in-out;
 }
 
 .sharp progressbar slider:active {
-  width: 2.5px;
-  margin: calc(2.5px / 2);
+  width: 5px;
+  margin: 0 calc(5px / 2);
 }
 
 .sharp progressbar[filled]::before,
 .sharp progressbar[filled] slider {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 40%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 40%);
+}
+
+.sharp progressbar[filled]::after {
+  border-right: 8px solid hsl(var(--current-hue), var(--current-saturation), 40%);
 }
 
 .sharp tooltip {
@@ -764,14 +833,15 @@ nav-rail {
   min-width: 100px;
   max-width: 100%;
   height: 100vh;
-  background-color: hsl(var(--theme-secondary-hue),
-      var(--theme-secondary-saturation),
+  background-color: hsl(var(--current-hue),
+      var(--current-saturation),
       95%);
   color: #4d4256;
   position: relative;
   top: 0;
   padding: 10px;
   z-index: 100;
+  display: block;
 }
 
 nav-item {
@@ -804,20 +874,20 @@ nav-item:hover icon {
 }
 
 nav-item[selected] {
-  color: hsl(var(--theme-hue), var(--theme-saturation), 20%);
+  color: hsl(var(--current-hue), var(--current-saturation), 20%);
   font-weight: bold;
   gap: 5px;
 }
 
 nav-item[selected] icon {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 80%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 80%);
 }
 
 nav-rail FAB {
-  background-color: hsl(var(--theme-secondary-hue),
-      var(--theme-secondary-saturation),
+  background-color: hsl(var(--current-hue),
+      var(--current-saturation),
       50%);
-  color: hsl(var(--theme-hue), var(--theme-saturation), 20%);
+  color: hsl(var(--current-hue), var(--current-saturation), 20%);
   width: 80%;
   display: block;
   aspect-ratio: 1/1;
@@ -848,8 +918,8 @@ nav-drawer {
   position: fixed;
   top: 0;
   min-width: 250px;
-  background-color: hsl(var(--theme-secondary-hue),
-      var(--theme-secondary-saturation),
+  background-color: hsl(var(--current-hue),
+      var(--current-saturation),
       95%);
   flex-direction: column;
   left: 100px;
@@ -861,6 +931,7 @@ nav-drawer {
   z-index: 1;
   box-shadow: 10px 0 10px -10px #000a;
   height: 100%;
+  overflow-y: scroll;
 }
 
 nav-drawer nav-item {
@@ -883,7 +954,7 @@ nav-drawer~main[pane] {
 }
 
 .sharp nav-drawer hr {
-  border-top: 1px solid hsl(var(--theme-hue), var(--theme-saturation), 10%);
+  border-top: 1px solid hsl(var(--current-hue), var(--current-saturation), 10%);
   margin: 15px;
 }
 
@@ -908,14 +979,14 @@ nav-item:has(~:not(nav-item):not(nav-drawer):hover) {
 }
 
 .sharp segmented-button sb-option {
-  border: 1px solid #4d4256;
+  border: 1.5px solid #ccc;
   border-left: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 18px calc((24px / 2) + 15px);
+  padding: 10px calc((24px / 2) + 10px);
   cursor: pointer;
-  transition: 0.1s all, 0s padding;
+  transition: 0.1s all, 0s padding-bottom, 0s padding-top;
   font-size: 1.2rem;
   gap: 5px;
 }
@@ -932,41 +1003,40 @@ nav-item:has(~:not(nav-item):not(nav-drawer):hover) {
 
 .sharp segmented-button sb-option:first-child {
   border-radius: 50px 0 0 50px;
-  border-left: 1px solid #4d4256;
+  border-left: 1.5px solid #ccc;
 }
 
 .sharp segmented-button sb-option:last-child {
   border-radius: 0 50px 50px 0;
-  border-left: 1px solid #4d4256;
+  border-right: 1.5px solid #ccc;
 }
 
 .sharp segmented-button sb-option[selected] {
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 90%);
-  padding: 15px;
+  background-color: hsl(var(--current-hue), var(--current-saturation), 90%);
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .sharp segmented-button sb-option[selected]::before {
   content: "\e5ca";
   font-family: "Material Symbols Outlined";
-  font-size: 24px;
+  font-size: 1.2rem;
   font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 .sharp button[toggle][shape-morph]:not([selected]),
-.sharp button-group[toggle][shape-morph] button:not([selected]) {
+.sharp button-group[toggle][shape-morph] button:not([selected]),
+.sharp button-group[shape-morph] button:not([selected])[toggle] {
   border-radius: 15px;
 }
 
 .sharp button[toggle][shape-morph][selected],
-.sharp button-group[toggle][shape-morph] button[selected] {
+.sharp button-group[toggle][shape-morph] button[selected],
+.sharp button-group[shape-morph] button:not([selected])[toggle] {
   border-radius: 100px;
 }
 
-.sharp [secondary],
-.sharp [secondary] * {
-  --theme-hue: var(--theme-secondary-hue);
-  --theme-saturation: var(--theme-secondary-saturation);
-}
+
 
 .sharp [xxs] {
   font-size: xx-small;
@@ -1025,12 +1095,12 @@ nav-item:has(~:not(nav-item):not(nav-drawer):hover) {
 
 .sharp switch[selected] {
   box-sizing: content-box;
-  border: 3px solid hsl(var(--theme-hue), var(--theme-saturation), 35%);
+  border: 3px solid hsl(var(--current-hue), var(--current-saturation), 35%);
   display: block;
   width: fit-content;
   border-radius: 100px;
   cursor: pointer;
-  background-color: hsl(var(--theme-hue), var(--theme-saturation), 35%);
+  background-color: hsl(var(--current-hue), var(--current-saturation), 35%);
 }
 
 .sharp switch::before {
@@ -1047,7 +1117,7 @@ nav-item:has(~:not(nav-item):not(nav-drawer):hover) {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: hsl(var(--theme-hue), var(--theme-saturation), 20%);
+  color: hsl(var(--current-hue), var(--current-saturation), 20%);
 }
 
 .sharp switch[selected]::before {
@@ -1057,7 +1127,63 @@ nav-item:has(~:not(nav-item):not(nav-drawer):hover) {
   background-color: #fff;
   width: 25px;
   height: 25px;
-  color: hsl(var(--theme-hue), var(--theme-saturation), 20%);
+  color: hsl(var(--current-hue), var(--current-saturation), 20%);
+}
+
+.sharp list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: hsl(var(--current-hue),
+      var(--current-saturation),
+      97.5%);
+  padding: 30px;
+}
+
+.sharp section list {
+  border-radius: 30px;
+}
+
+.sharp list list-item {
+  padding: 15px;
+  font-size: larger;
+  border-radius: 15px;
+  transition: 0.1s ease-in-out;
+  color: #4d4256;
+  cursor: pointer;
+}
+
+.sharp list list-item:hover {
+  background-color: hsl(var(--current-hue), var(--current-saturation), 90%);
+}
+
+.sharp list list-item icon {
+  font-size: 2rem;
+  float: left;
+  vertical-align: middle;
+  margin: auto 15px;
+  margin-left: 0;
+}
+
+.sharp list list-item description {
+  display: block;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  color: #888;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sharp list list-item:not(:has(description)) {
+  display: flex;
+  align-items: center;
+}
+
+.sharp list list-divider {
+  border-top: 1px solid #aaa;
+  width: 100%;
 }
 
 @counter-style summary {
@@ -1072,12 +1198,14 @@ nav-item:has(~:not(nav-item):not(nav-drawer):hover) {
     opacity: 0;
     display: none;
     translate: -10px 0;
+    z-index: -1;
   }
 
   to {
     opacity: 1;
     translate: 0 0;
     display: flex;
+    z-index: -1;
   }
 }
 
@@ -1086,26 +1214,101 @@ nav-item:has(~:not(nav-item):not(nav-drawer):hover) {
     opacity: 1;
     translate: 0 0;
     display: flex;
+    z-index: -1;
   }
 
   to {
     opacity: 0;
     translate: -10px 0;
     display: none;
+    z-index: -1;
   }
 }
 
-@media (max-width: 600px) {
+@keyframes enter-from-nav {
+  from {
+    opacity: 0;
+    display: none;
+    translate: -10px 0;
+    z-index: -1;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+    display: flex;
+    z-index: -1;
+  }
+}
+
+@keyframes exit-to-nav {
+  from {
+    opacity: 1;
+    translate: 0 0;
+    display: flex;
+    z-index: -1;
+  }
+
+  to {
+    opacity: 0;
+    translate: -10px 0;
+    display: none;
+    z-index: -1;
+  }
+}
+
+@media (max-width: 900px) {
+
+  .sharp h0 {
+    font-size: 4rem;
+  }
+
   .sharp h1 {
     font-size: 2.5rem;
+  }
+
+  .sharp h2 {
+    font-size: 2rem;
+  }
+
+  .sharp h3 {
+    font-size: 1.6rem;
+  }
+
+  .sharp h4 {
+    font-size: 1.3rem;
+  }
+
+  .sharp button[main] {
+    font-size: 2rem;
+    padding: 25px;
   }
 
   .sharp section {
     padding: 20px;
   }
 
+
+
+  .sharp pane:not(:has(padding)):not([no-padding]) {
+    padding: 0 20px;
+  }
+
+  .sharp main:not(:has(padding)):not([no-padding]) {
+    padding: 0 20px;
+  }
+
+  .sharp padding {
+    padding: 0 20px;
+  }
+
+}
+
+@media (max-width: 600px) {
   .sharp toast {
     width: calc(100% - 100px);
+    z-index: 200;
+    bottom: 110px;
   }
 
   .sharp pane,
@@ -1117,7 +1320,54 @@ nav-item:has(~:not(nav-item):not(nav-drawer):hover) {
     right: 0;
     left: initial;
     border-radius: 20px;
-    padding: 20px;
+    padding: 0 20px;
     margin: 0;
+  }
+
+  .sharp:has(> nav-rail) {
+    flex-direction: column;
+
+  }
+
+  .sharp:has(> nav-rail) nav-rail {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    height: 100px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    bottom: 0;
+    top: initial;
+  }
+
+  .sharp:has(> nav-rail) nav-rail FAB {
+    width: 80px;
+    aspect-ratio: 1/1;
+    padding: 15px;
+    position: absolute;
+    right: 20px;
+    bottom: 120px;
+    box-shadow: 0 0 10px #0006;
+  }
+
+  .sharp:has(> nav-rail) main {
+    padding-bottom: 100px;
+  }
+
+  .sharp nav-rail nav-drawer {
+    left: 0;
+    width: 100%;
+    top: 100px;
+    bottom: 100px;
+    padding: 25px;
+    height: calc(100% - 200px);
+    border-radius: 50px 50px 0 0;
+    box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2);
+    border-bottom: #ddd 2px solid;
+  }
+
+  .sharp nav-rail nav-item {
+    width: 100%;
   }
 }
