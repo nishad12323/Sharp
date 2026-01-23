@@ -1,6 +1,6 @@
 document
   .querySelectorAll(
-    ".sharp button[toggle], .sharp [toggle] button, .sharp switch"
+    ".sharp button[toggle], .sharp [toggle] button, .sharp switch",
   )
   .forEach((button) => {
     button.addEventListener("click", (e) => {
@@ -78,7 +78,7 @@ document
 
 document
   .querySelectorAll(
-    "button[for][link-start-display=none], sb-option[for][link-start-display=none]"
+    "button[for][link-start-display=none], sb-option[for][link-start-display=none]",
   )
   .forEach((button) => {
     document.getElementById(button.getAttribute("for")).style.display = "none";
@@ -139,13 +139,13 @@ sharp = {
 sharp.Toast.toast = document.createElement("toast");
 document.body.appendChild(sharp.Toast.toast);
 
-setTimeout(() => {
-  x = new sharp.Toast("Simple toast.", "Close", 1);
-  x.onButtonClick = (e) => {
-    new sharp.Toast("You clicked the button!", null, 0).show(2);
-  };
-  x.show(2);
-}, 1000);
+// setTimeout(() => {
+//   x = new sharp.Toast("Simple toast.", "Close", 1);
+//   x.onButtonClick = (e) => {
+//     new sharp.Toast("You clicked the button!", null, 0).show(2);
+//   };
+//   x.show(2);
+// }, 1000);
 
 document
   .querySelectorAll(".sharp progressbar:has(slider)")
