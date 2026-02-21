@@ -832,7 +832,7 @@ nav-rail {
   width: 100px;
   min-width: 100px;
   max-width: 100%;
-  height: 100%;
+  height: max(100%, 100vh);
   background-color: hsl(var(--current-hue),
       var(--current-saturation),
       95%);
