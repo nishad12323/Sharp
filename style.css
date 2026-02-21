@@ -832,7 +832,8 @@ nav-rail {
   width: 100px;
   min-width: 100px;
   max-width: 100%;
-  height: max(100%, 100vh);
+  height: 100vh;
+  overflow-y: scroll;
   background-color: hsl(var(--current-hue),
       var(--current-saturation),
       95%);
